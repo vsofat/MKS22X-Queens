@@ -3,10 +3,18 @@ public class QueenBoard {
   private int sum;
   private int[][] board;
 
+  //main for testing
   public static void main(String[] args) {
   }
 
+  // constructors
   public QueenBoard(int size) {
+    board = new int[size][size];
+    for (int[] x: board) {
+      for (int y: x) {
+        y = 0;
+      }
+    }
   }
 
   public String toString() {
