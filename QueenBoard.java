@@ -24,12 +24,27 @@ public class QueenBoard {
     }
   }
 
+ /**
+ *@return The output string formatted as follows:
+ *All numbers that represent queens are replaced with 'Q'
+ *all others are displayed as underscores '_'
+ *There are spaces between each symbol:
+ *"""_ _ Q _
+ *Q _ _ _
+ *_ _ _ Q
+ *_ Q _ _"""
+ *(pythonic string notation for clarity,
+ *excludes the character up to the *)
+ */
+
+ public String toString(){}
+
   public String toString() {
     String result = "";
     for (int[] row : board) { //each row
       for (int col : row) {
         if (col == -1) { // value for queen
-          result += "Q ";} // Q is symbol for queen
+          result += " Q ";} // Q is symbol for queen
           else result += " 0 "; // if not a queen put a underscore to start with
         }
         result = result.substring(0, result.length() - 1);
@@ -38,9 +53,16 @@ public class QueenBoard {
       return result;
     }
 
+    /**
+    *@return false when the board is not solveable and leaves the board filled with zeros;
+    *        true when the board is solveable, and leaves the board in a solved state
+    *@throws IllegalStateException when the board starts with any non-zero value
+    */
+
     public boolean solve() {
       return helperSolve(0); // has to start at 0
     }
+
     /*
     HOW TO WRITE HELPER FOR SOLVE
 
@@ -60,7 +82,7 @@ public class QueenBoard {
       }
       for (int row = 0; row < board.length; row ++) {
         if (addQueen(row, col)) { //needs to be defined
-          if (solveHelper(c + 1)){
+          if (solveHelper(col + 1)){
             return true;
           }
           removeQueen(row, col);
@@ -76,25 +98,26 @@ public class QueenBoard {
       if (board[0][0] != 0){
         throw new IllegalStateException("Negative Value");
       }
-      solutionsHelper(0);
+      oneSolution(0);
       return count;
     }
 
     private void oneSolution(int row) {
-      if (r >= board.length){
+      if (row >= board.length){
         sum ++;}
         else{
           if (row < 0 ){
             throw new IllegalStateException("Negative Value");
           }
-          for (int c = 0; c < board.length; c ++){
-            if (addQueen(r,c)){
-              solutionsHelper(r + 1);
-              removeQueen(r, c);
+          for (int col = 0; col < board.length; col ++){
+            if (addQueen(row,col)){
+              solutionsHelper(row + 1);
+              removeQueen(row, col);
             }
           }
         }
       }
+
     }
 
     /*
@@ -106,5 +129,3 @@ public class QueenBoard {
 }
 
 */
-
-}
