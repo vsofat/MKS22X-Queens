@@ -6,7 +6,10 @@ public class QueenBoard {
 
   //main for testing
   public static void main(String[] args) {
-    QueenBoard a = new QueenBoard(4) ;
+    QueenBoard  board8 = new QueenBoard(4); // testing with size 8
+    System.out.println(board8.countSolutions());
+    // DRIVER 2 (THANKS TO VICTORIA!)
+    /*QueenBoard a = new QueenBoard(4) ;
     if (a.solve()) System.out.println("The board (a) is solvable! Good!") ;
     else {
       System.out.println("Work on solve method! It's not working correctly right now...") ;
@@ -43,7 +46,9 @@ public class QueenBoard {
     else {
       System.out.println("There is something wrong with countSolutions because it didn't return 2 for a board of size 4!") ;
     }
+    */
     /*
+    // DRIVER 1
     QueenBoard  board = new QueenBoard(0); // testing with size 0
     System.out.println(board.countSolutions());
     System.out.println("0 \n"); // actual result to match with program's result
@@ -97,6 +102,7 @@ public class QueenBoard {
 
   // constructor
   public QueenBoard(int size) {
+
     this.size = size;
     board = new int[size][size];
     for (int[] row: board) { // each row
@@ -183,19 +189,31 @@ public class QueenBoard {
     }
 
     private void oneSolution(int row) {
+      System.out.println("hit top");
+      System.out.println(this.toString());
       if (row >= board.length){
-        count ++;}
+        count ++;
+        System.out.println("Solution!");
+      }
         else{
           if (row < 0 ){
             throw new IllegalStateException("Negative Value");
           }
           for (int col = 0; col < board.length; col ++){
             if (addQueen(row,col)){
+              System.out.println("added");
+              System.out.println(this.toString());
+
               oneSolution(row + 1);
+
+
+              System.out.println("removed");
               removeQueen(row, col);
+
             }
           }
         }
+       // for testing
       }
 
       private boolean addQueen(int row, int col) {
