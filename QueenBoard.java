@@ -7,6 +7,9 @@ public class QueenBoard {
   public static void main(String[] args) {
     QueenBoard  boarder = new QueenBoard(5); // testing with size 8
     System.out.println(boarder.countSolutions());
+    for (int index = 0; index < 6; index++){
+      boarder.runTest(index);
+    }
     // DRIVER 2 (THANKS TO VICTORIA!)
     /*QueenBoard a = new QueenBoard(4) ;
     if (a.solve()) System.out.println("The board (a) is solvable! Good!") ;
@@ -46,6 +49,7 @@ public class QueenBoard {
       System.out.println("There is something wrong with countSolutions because it didn't return 2 for a board of size 4!") ;
     }
     */
+
 
     // DRIVER 1
     QueenBoard  board = new QueenBoard(0); // testing with size 0
@@ -99,9 +103,26 @@ public class QueenBoard {
 
   }
 
+  //testcase must be a valid index of your input/output array
+  public static void runTest(int i){
+  QueenBoard b;
+  int[]tests =   {1,2,3,4,5,8};
+  int[]answers = {1,0,0,2,10,92};
+  if(i >= 0 && i < tests.length ){
+    int size = tests[i];
+    int correct = answers[i];
+    b = new QueenBoard(size);
+    int ans  = b.countSolutions();
+
+    if(correct==ans){
+      System.out.println("PASS board size: "+tests[i]+" "+ans);
+    }else{
+      System.out.println("FAIL board size: "+tests[i]+" "+ans+" vs "+correct);
+    }}}
+
+
   // constructor
   public QueenBoard(int size) {
-
     this.size = size;
     board = new int[size][size];
     for (int[] row: board) { // each row
